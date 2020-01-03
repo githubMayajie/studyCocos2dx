@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion PROP_COMPILE_SDK_VERSION.toInteger()
+    buildToolsVersion PROP_BUILD_TOOLS_VERSION
+    defaultConfig {
+        applicationId "com.boyaa.glesdemo"
+        minSdkVersion PROP_MIN_SDK_VERSION
+        targetSdkVersion PROP_TARGET_SDK_VERSION
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            abiFilters = ['x86']
+//            abiFilters.addAll(PROP_APP_ABI.split(':').collect{it as String})
+        }
+    }
+
+    buildTypes {
+        release {
+            externalNativeBuild {
+                cmake {
+                    arguments "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+                }
+            }
+            jniDebuggable true
+        }
+        debug{
+            externalNativeBuild {
+                cmake {
+                    arguments "-DCMAKE_BUILD_TYPE=Debug"
+                }
+            }
+            jniDebuggable true
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+}

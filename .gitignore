@@ -1,0 +1,6 @@
+**/.vs/
+**/Debug.win32/
+**/simulator/
+build/MyLuaGame/frameworks/cocos2d-x/
+build/MyCppGame/cocos2d/
+enginer/cocos2d-x-3.17.2
